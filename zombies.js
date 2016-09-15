@@ -100,10 +100,11 @@ function Player(name, health, strength, speed) {
   this.isAlive = true;
   this.equipped = false;
   var pack = [];
-  this.getPack = pack;
+  this.getPack = function() {return pack};
   var maxHealth = health;
-  this.getMaxHealth = maxHealth;
+  this.getMaxHealth = function() {return maxHealth};
 };
+
 
 /**
  * Player Class Method => checkPack()
@@ -118,7 +119,7 @@ function Player(name, health, strength, speed) {
  */
 
 Player.prototype.checkPack = function() {
-  return this.pack;
+  return this.getPack.join(', ');
 };
 
 /**
@@ -139,6 +140,15 @@ Player.prototype.checkPack = function() {
  * @return {boolean} true/false     Whether player was able to store item in pack.
  */
 
+Player.prototype.takeItem = function(item) {
+  if (this.getPack().length >= 3) {
+    console.log('pack is full so the item could not be stored');
+    return false;
+  } 
+  this.getPack().push(item);
+  console.log(Player.name + ' has gained a ' + item.name);
+  return true;
+};
 
 /**
  * Player Class Method => discardItem(item)
