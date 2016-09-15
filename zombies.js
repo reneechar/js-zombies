@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Class => Item(name)
  * -----------------------------
@@ -91,7 +92,18 @@ Food.prototype = Object.create(Item.prototype, {
  * @property {method} getPack              Returns private variable `pack`.
  * @property {method} getMaxHealth         Returns private variable `maxHealth`.
  */
-
+function Player(name, health, strength, speed) {
+  this.name = name;
+  this.health = health;
+  this.strength = strength;
+  this.speed = speed;
+  this.isAlive = true;
+  this.equipped = false;
+  var pack = [];
+  this.getPack = pack;
+  var maxHealth = health;
+  this.getMaxHealth = maxHealth;
+};
 
 /**
  * Player Class Method => checkPack()
@@ -105,6 +117,9 @@ Food.prototype = Object.create(Item.prototype, {
  * @name checkPack
  */
 
+Player.prototype.checkPack = function() {
+  return this.pack;
+};
 
 /**
  * Player Class Method => takeItem(item)
