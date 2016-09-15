@@ -181,7 +181,7 @@ Player.prototype.discardItem = function(item) {
     return false;
   }
   this.getPack().splice(this.getPack().indexOf(item), 1);
-  console.log(this.name + ' has chucked their ' + item.name);
+  console.log(this.name + ' has removed ' + item.name + ' from their pack');
   return true;
 };
 
@@ -205,6 +205,18 @@ Player.prototype.discardItem = function(item) {
  * @param {Weapon} itemToEquip  The weapon item to equip.
  */
 
+Player.prototype.equip = function(itemToEquip) {
+  if (itemToEquip instanceof Weapon && this.getPack().indexOf(itemToEquip) > -1) {
+    if(this.equipped){
+      this.getPack().splice(this.getPack().indexOf(itemToEquip), 1, this.equipped);
+      this.equipped = itemToEquip;
+    } else {
+      this.getPack().splice(this.getPack().indexOf(itemToEquip), 1);
+      this.equipped = itemToEquip;
+    }
+  }
+  return false;
+};
 
 /**
  * Player Class Method => eat(itemToEat)
